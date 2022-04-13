@@ -29,7 +29,7 @@ def middle(e, s):
 
 
 def det(a, b):
-    """ return determinant of two points a and b """
+    """ return determinant of 2x2 matrix ab """
     return a[0] * b[1] - a[1] * b[0]
 
 
