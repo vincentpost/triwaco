@@ -1,2 +1,4 @@
-# triwaco
-Triwaco utilities
+# Adore
+Adore utilities
+
+read/write adore format (Triwaco)

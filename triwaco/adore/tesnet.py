@@ -1,32 +1,23 @@
-'''
+"""
 Created on 19 Apr 2013
+Modified Apr 13, 2022 for python 3
 
 @author: theo
-'''
-import adore
+"""
+from .adore import AdoreCollection
+import numpy as np
 
-class Tesnet(object):
-    '''
-    classdocs
-    '''
 
-    def __init__(self, filename=None):
-        '''
-        Constructor
-        '''
-        if filename is not None:
-            self.load(filename)
-            
-    def load(self, filename):
-        self.teo = adore.AdoreCollection(filename)
-        x = self.teo.get_values('X-COORDINATES')        
-        y = self.teo.get_values('Y-COORDINATES')
-        e1 = self.teo.get_values('ELEMENT NODES 1')
-        e2 = self.teo.get_values('ELEMENT NODES 2')
-        e3 = self.teo.get_values('ELEMENT NODES 3')
-        b = self.teo.get_values('LIST BOUNDARY NODES')
-        s = self.teo.get_values('SOURCE NODES')
-        sn = self.teo.get_values('SOURCE NUMBERS')
-        nr = self.teo.get_values('NUMBER NODES/RIVER')
-        r = self.teo.get_values('LIST RIVER NODES')
-        rn = self.teo.get_values('RIVER NUMBERS')
+class Tesnet(AdoreCollection):
+    """ Triwaco network file (tesnet output) """
+
+    def nodes(self):
+        x = self['X-COORDINATES'].get_values()
+        y = self['Y-COORDINATES'].get_values()
+        return np.array((x, y)).T
+
+    def elements(self):
+        e1 = self['ELEMENT NODES 1'].get_values()
+        e2 = self['ELEMENT NODES 2'].get_values()
+        e3 = self['ELEMENT NODES 3'].get_values()
+        return np.array((e1, e2, e3)).T
