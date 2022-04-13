@@ -2,6 +2,7 @@
 Created on Sep 22, 2011
 Modified Apr 13, 2022 for python 3
 @author: theo
+TODO: use numpy arrays to store data
 """
 import re
 
