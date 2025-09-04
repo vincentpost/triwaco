@@ -92,6 +92,9 @@ class Adoreblock:
         with open(self.filename, 'rb') as f:
             f.seek(self.pos, 0)
             self.data = []
+            if self.constant: # In this case self.count == 0 so while loop will be skipped
+                line = readline(f)
+                self.data = [float(line)]
             while len(self.data) < self.count:
                 line = readline(f)
                 if line == '':
@@ -191,7 +194,8 @@ class AdoreCollection(dict):
                 width = int(d['width'])
                 nlines = block.count / rep + 1
                 # add additional byte(s) for line terminator
-                extra = 2 if line.endswith('\r\n') else 1
+                # extra = 2 if line.endswith('\r\n') else 1
+                extra = 1
                 linesize = rep * width + extra
                 offset = int(nlines * linesize)
                 f.seek(offset, 1)
